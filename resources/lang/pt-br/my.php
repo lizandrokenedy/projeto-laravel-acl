@@ -17,6 +17,11 @@ return [
     'search' => 'Buscar',
     'clear' => 'Limpar',
     'add' => 'Adicionar',
-    'user' => 'Usuários'
+    'users' => 'Usuários',
+    'user' => 'Usuário',
+    'home' => 'Início',
+    'add_user' => 'Adicionar :page',
+    'registration_successfully_added'=>'Registro adicionado com sucesso!',
+    'error_adding_record'=>'Erro ao adicionar registro!',
 
 ];

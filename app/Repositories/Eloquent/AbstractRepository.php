@@ -34,4 +34,8 @@ abstract class AbstractRepository {
         return app($this->model);
     }
 
+    public function create(array $data):bool {
+        return (bool) $this->model->create($data);
+    }
+
 }

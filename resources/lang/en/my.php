@@ -17,6 +17,11 @@ return [
     'search' => 'Search',
     'clear' => 'Clear',
     'add' => 'Add',
-    'user' => 'User'
+    'users' => 'User',
+    'user' => 'User',
+    'home' => 'Home',
+    'add_user' => 'Add :page',
+    'registration_successfully_added'=>'Registration successfully added!',
+    'error_adding_record'=>'Error adding record!',
 
 ];
