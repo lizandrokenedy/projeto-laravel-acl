@@ -11,7 +11,7 @@
   @search(['routeName'=>$routeName, 'search'=>$search])
   @endsearch
 
-  @table(['columnList'=>$columnList, 'list'=>$list])
+  @table(['columnList'=>$columnList, 'list'=>$list, 'routeName'=>$routeName])
   @endtable
 
   @paginate(['search'=>$search, 'list'=>$list])

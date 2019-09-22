@@ -10,7 +10,7 @@
 
 @form(['action'=>route($routeName.".store"), 'method'=>'POST'])
 @include('admin.users.form')
-<button class="btn btn-primary btn-lg float-right" type="submit">Adicionar</button>
+<button class="btn btn-primary btn-lg float-right" type="submit">{{__('my.add')}}</button>
 @endform
 
 @endpage

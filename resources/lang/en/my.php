@@ -23,5 +23,9 @@ return [
     'add_user' => 'Add :page',
     'registration_successfully_added'=>'Registration successfully added!',
     'error_adding_record'=>'Error adding record!',
+    'action'=>'Action',
+    'details'=>'Details',
+    'edit'=>'Edit',
+    'delete'=>'Delete'
 
 ];
