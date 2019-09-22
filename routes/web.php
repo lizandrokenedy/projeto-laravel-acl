@@ -10,6 +10,19 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('lang', function () {
+    $lang = session('lang', 'pt-br');
+    if($lang == 'pt-br'){
+        $lang = "en";
+    } else {
+        $lang = "pt-br";
+    }
+    session(['lang' => $lang]);
+    
+    return redirect()->back();
+    
+})->name('lang');
+
 
 Route::get('/', function () {
     return view('welcome');

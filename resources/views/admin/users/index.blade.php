@@ -5,7 +5,7 @@
   <div class="row justify-content-center">
     <div class="col-md-12">
       <div class="card">
-        <div class="card-header">Dashboard</div>
+        <div class="card-header">@lang('my.list', ['page'=>$page])</div>
 
         <div class="card-body">
           @if (session('status'))
@@ -17,36 +17,43 @@
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Lista de Usuários</li>
+              <li class="breadcrumb-item active" aria-current="page">@lang('my.list', ['page'=>$page])</li>
             </ol>
           </nav>
 
-          <form class="form-inline" method="GET" action="{{route('users.index')}}">
+          <form class="form-inline" method="GET" action="{{route($routeName.'.index')}}">
             <div class="form-group mb-2">
-              <a href="#">Adicionar</a>
+              <a href="#">@lang('my.add')</a>
             </div>
             <div class="form-group mx-sm-3 mb-2">
-              <input type="search" class="form-control" name="search" placeholder="Busca" value="{{$search}}">
+              <input type="search" class="form-control" name="search" placeholder="@lang('my.search')"
+                value="{{$search}}">
             </div>
-            <button type="submit" class="btn btn-primary mb-2">Busca</button>
-            <a class="btn btn-primary mb-2 ml-2" href="{{route('users.index')}}">Limpar</a>
+            <button type="submit" class="btn btn-primary mb-2">@lang('my.search')</button>
+            <a class="btn btn-primary mb-2 ml-2" href="{{route($routeName.'.index')}}">@lang('my.clear')</a>
           </form>
 
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nome</th>
-                <th scope="col">E-mail</th>
+                @foreach ($columnList as $key => $value)
+                <th scope="col">{{$value}}</th>
+                @endforeach
               </tr>
             </thead>
             <tbody>
               @foreach ($list as $key => $value )
 
               <tr>
-                <th scope="row">{{$value->id}}</th>
-                <td>{{$value->name}}</td>
-                <td>{{$value->email}}</td>
+                @foreach ($columnList as $key2 => $value2)
+                @if($key2 == 'id')
+                <th scope="row">@php echo $value->{$key2} @endphp</th>
+                @else
+                <td>@php echo $value->{$key2} @endphp</td>
+                @endif
+
+                @endforeach
+              
               </tr>
               @endforeach
 
@@ -54,7 +61,7 @@
             </tbody>
           </table>
 
-          @if(!$search)
+          @if(!$search && $list)
           <div class="">
             {{$list}}
           </div>
