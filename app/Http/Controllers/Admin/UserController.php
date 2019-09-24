@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -101,9 +102,33 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        //
+        $routeName = $this->route;
+
+        $register = $this->model->find($id);
+        if($register){
+            $page = trans('my.users');
+            $page_edit = trans('my.user');
+    
+            $breadcrumb = [
+                (object)['url'=>route('home'), 'title'=>trans('my.home')],
+                (object)['url'=>route($routeName.'.index'), 'title'=>trans('my.list',['page'=>$page])],
+                (object)['url'=>'', 'title'=>trans('my.show_user', ['page'=>$page_edit])]
+            ];
+
+            $delete = false;
+            if($request->delete ?? false){
+                $request->session()->flash('msg', trans('my.confirm_operation'));
+                $request->session()->flash('status', 'error');
+                $delete = true;
+            }
+    
+            return view('admin.'.$routeName.'.show', compact('register', 'page', 'page_edit', 'routeName', 'breadcrumb', 'delete'));
+        }
+
+        return redirect()->route($routeName.'.index');
+
     }
 
     /**
@@ -114,7 +139,24 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $routeName = $this->route;
+
+        $register = $this->model->find($id);
+        if($register){
+            $page = trans('my.users');
+            $page_edit = trans('my.user');
+    
+            $breadcrumb = [
+                (object)['url'=>route('home'), 'title'=>trans('my.home')],
+                (object)['url'=>route($routeName.'.index'), 'title'=>trans('my.list',['page'=>$page])],
+                (object)['url'=>'', 'title'=>trans('my.edit_user', ['page'=>$page_edit])]
+            ];
+    
+            return view('admin.'.$routeName.'.edit', compact('register', 'page', 'page_edit', 'routeName', 'breadcrumb'));
+        }
+
+        return redirect()->route($routeName.'.index');
+
     }
 
     /**
@@ -126,7 +168,27 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        if(!$data['password']){
+            unset($data['password']);
+        }
+
+        Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($id)],
+            'password' => ['sometimes','required', 'string', 'min:8', 'confirmed'],
+        ])->validate();
+
+        if($this->model->update($data, $id)){
+            $request->session()->flash('msg', trans('my.successfully_edited_record'));
+            $request->session()->flash('status', 'success');
+            return redirect()->back();
+        }else{
+            $request->session()->flash('msg', trans('my.error_editing_record'));
+            $request->session()->flash('status', 'error');
+            return redirect()->back();
+        }
     }
 
     /**
@@ -137,6 +199,18 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+
+        if($this->model->delete($id)){
+            session()->flash('msg', trans('my.registration_deleted_successfully'));
+            session()->flash('status', 'success');
+            
+        }else{
+            session()->flash('msg', trans('my.error_deleting_record'));
+            session()->flash('status', 'error');
+            
+        }
+        $routeName = $this->route;
+        return redirect()->route($routeName.'.index');
     }
 }

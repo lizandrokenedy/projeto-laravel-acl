@@ -21,11 +21,16 @@ return [
     'user' => 'User',
     'home' => 'Home',
     'add_user' => 'Add :page',
+    'edit_user' => 'Edit :page',
+    'show_user' => 'Show :page',
     'registration_successfully_added'=>'Registration successfully added!',
     'error_adding_record'=>'Error adding record!',
+    'successfully_edited_record'=>'Successfully edited record!',
+    'error_editing_record'=>'Error editing record!',
     'action'=>'Action',
     'details'=>'Details',
     'edit'=>'Edit',
-    'delete'=>'Delete'
+    'delete'=>'Delete',
+    'confirm_operation'=>'Confirm operation?'
 
 ];
