@@ -33,7 +33,10 @@ return [
     'delete'=>'Deletar',
     'confirm_operation'=>'Confirmar operação?',
     'error_deleting_record'=>'Erro ao deletar registro!',
-    'registration_deleted_successfully'=>'Registro deletado com sucesso!'
+    'registration_deleted_successfully'=>'Registro deletado com sucesso!',
+    'description'=>'Descrição',
+    'permissions'=>'Permissões',
+    'permission'=>'Permissão'
     
 
 ];

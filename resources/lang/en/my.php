@@ -31,6 +31,9 @@ return [
     'details'=>'Details',
     'edit'=>'Edit',
     'delete'=>'Delete',
-    'confirm_operation'=>'Confirm operation?'
+    'confirm_operation'=>'Confirm operation?',
+    'description'=>'Description',
+    'permissions'=>'Permissions',
+    'permission'=>'Permission'
 
 ];
