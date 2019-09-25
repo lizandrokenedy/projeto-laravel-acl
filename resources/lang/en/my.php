@@ -32,8 +32,15 @@ return [
     'edit'=>'Edit',
     'delete'=>'Delete',
     'confirm_operation'=>'Confirm operation?',
+    'error_deleting_record'=>'Error deleting record!',
+    'registration_deleted_successfully'=>'Registration deleted successfully!',
     'description'=>'Description',
     'permissions'=>'Permissions',
-    'permission'=>'Permission'
+    'permission'=>'Permission',
+    'description_card_user'=>'Allows maintenance of users registered in the system',
+    'description_card_permission'=>'Allows maintenance of permissions registered in the system',
+    'role'=>'Role',
+    'roles'=>'Roles',
+    'description_card_roles'=>'It allows to perform maintenance of functions registered in the system'
 
 ];

@@ -4,22 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Repositories\Contracts\PermissionRepositoryInterface;
 use App\Repositories\Contracts\RoleRepositoryInterface;
-use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
-class UserController extends Controller
+class RoleController extends Controller
 {
-    private $route = 'users';
+    private $route = 'roles';
     private $paginate = 5;
-    private $search = ['name', 'email'];
+    private $search = ['name', 'description'];
     private $model;
-    private $modelRole;
+    private $modelPermission;
 
-    public function __construct(UserRepositoryInterface $model, RoleRepositoryInterface $modelRole){
+    public function __construct(RoleRepositoryInterface $model, PermissionRepositoryInterface $modelPermission){
+        $this->modelPermission = $modelPermission;
         $this->model = $model;
-        $this->modelRole = $modelRole;
     }
     /**
      * Display a listing of the resource.
@@ -29,7 +28,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
        
-        $columnList = ['id' => '#', 'name' => trans('my.name'), 'email' => trans('my.email')];
+        $columnList = ['id' => '#', 'name' => trans('my.name'), 'name' => trans('my.name'), 'description' => trans('my.description')];
         
         $search = "";
         if(isset($request->search)){
@@ -39,7 +38,7 @@ class UserController extends Controller
             $list = $this->model->paginate($this->paginate, 'id', 'DESC');
         }  
 
-        $page = trans('my.users');
+        $page = trans('my.roles');
         $routeName = $this->route;
 
         //$request->session()->flash('msg', 'Task was successful!');
@@ -61,10 +60,10 @@ class UserController extends Controller
     public function create()
     {
         $routeName = $this->route;
-        $page = trans('my.users');
-        $page_add = trans('my.user');
+        $page = trans('my.roles');
+        $page_add = trans('my.role');
 
-        $roles = $this->modelRole->all();
+        $permissions = $this->modelPermission->all('name', 'ASC');
 
         $breadcrumb = [
             (object)['url'=>route('home'), 'title'=>trans('my.home')],
@@ -72,7 +71,7 @@ class UserController extends Controller
             (object)['url'=>'', 'title'=>trans('my.add_user', ['page'=>$page_add])]
         ];
 
-        return view('admin.'.$routeName.'.create', compact( 'page', 'page_add', 'routeName', 'breadcrumb', 'roles'));
+        return view('admin.'.$routeName.'.create', compact( 'page', 'page_add', 'routeName', 'breadcrumb', 'permissions'));
     }
 
     /**
@@ -86,8 +85,7 @@ class UserController extends Controller
         $data = $request->all();
         Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'description' => ['required', 'string', 'max:255'],
         ])->validate();
         
         if($this->model->create($data)){
@@ -113,8 +111,8 @@ class UserController extends Controller
 
         $register = $this->model->find($id);
         if($register){
-            $page = trans('my.users');
-            $page_edit = trans('my.user');
+            $page = trans('my.roles');
+            $page_edit = trans('my.role');
     
             $breadcrumb = [
                 (object)['url'=>route('home'), 'title'=>trans('my.home')],
@@ -148,18 +146,18 @@ class UserController extends Controller
 
         $register = $this->model->find($id);
         if($register){
-            $page = trans('my.users');
-            $page_edit = trans('my.user');
-            
-            $roles = $this->modelRole->all();
-            
+            $page = trans('my.roles');
+            $page_edit = trans('my.role');
+    
+            $permissions = $this->modelPermission->all('name', 'ASC');
+
             $breadcrumb = [
                 (object)['url'=>route('home'), 'title'=>trans('my.home')],
                 (object)['url'=>route($routeName.'.index'), 'title'=>trans('my.list',['page'=>$page])],
                 (object)['url'=>'', 'title'=>trans('my.edit_user', ['page'=>$page_edit])]
             ];
     
-            return view('admin.'.$routeName.'.edit', compact('register', 'page', 'page_edit', 'routeName', 'breadcrumb', 'roles'));
+            return view('admin.'.$routeName.'.edit', compact('register', 'page', 'page_edit', 'routeName', 'breadcrumb', 'permissions'));
         }
 
         return redirect()->route($routeName.'.index');
@@ -177,14 +175,9 @@ class UserController extends Controller
     {
         $data = $request->all();
 
-        if(!$data['password']){
-            unset($data['password']);
-        }
-
         Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($id)],
-            'password' => ['sometimes','required', 'string', 'min:8', 'confirmed'],
+            'description' => ['required', 'string', 'max:255'],
         ])->validate();
 
         if($this->model->update($data, $id)){

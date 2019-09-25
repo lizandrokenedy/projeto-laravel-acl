@@ -36,7 +36,12 @@ return [
     'registration_deleted_successfully'=>'Registro deletado com sucesso!',
     'description'=>'Descrição',
     'permissions'=>'Permissões',
-    'permission'=>'Permissão'
+    'permission'=>'Permissão',
+    'description_card_user'=>'Permite realizar manutenções de usuários cadastrados no sistema.',
+    'description_card_permission'=>'Permite realizar manutenções de permissões cadastradas no sistema.',
+    'role'=>'Função',
+    'roles'=>'Funções',
+    'description_card_roles'=>'Permite realizar manutenções de funções cadastradas no sistema.'
     
 
 ];

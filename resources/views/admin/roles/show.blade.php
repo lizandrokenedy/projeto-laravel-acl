@@ -9,7 +9,7 @@
 @endbreadcrumb
 
 <p>{{__('my.name')}}: {{$register->name}}</p>
-<p>{{__('my.email')}}: {{$register->email}}</p>
+<p>{{__('my.description')}} {{$register->description}}</p>
 
 @if($delete)
     @form(['action'=>route($routeName.".destroy", $register->id), 'method'=>'DELETE'])
