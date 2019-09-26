@@ -1,10 +1,12 @@
 <?php
 
 return [
-
+    
     'lang' => 'pt-br',
+    'courses'=>'Courses',
     'login' => 'Login',
     'register'=> 'Register',
+    'logout'=>'Logout',
     'name'=> 'Name',
     'email' => 'E-mail',
     'password' => 'Password',
@@ -41,6 +43,11 @@ return [
     'description_card_permission'=>'Allows maintenance of permissions registered in the system',
     'role'=>'Role',
     'roles'=>'Roles',
-    'description_card_roles'=>'It allows to perform maintenance of functions registered in the system'
+    'description_card_roles'=>'It allows to perform maintenance of functions registered in the system',
+    'welcome'=>'Welcome to the tips and courses site!',
+    'welcome2'=>'ENJOY OUR CONTENT',
+    'course_list'=>'course list',
+    'courses'=>'Courses',
+    'participate'=>'Participate!'
 
 ];

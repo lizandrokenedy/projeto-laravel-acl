@@ -1,10 +1,11 @@
 <?php
 
-return [
-
+return [   
     'lang' => 'en',
+    'courses'=>'Cursos',
     'login' => 'Entrar',
     'register'=> 'Cadastrar',
+    'logout'=>'Sair',
     'name' => 'Nome',
     'email' => 'E-mail',
     'password' => 'Senha',
@@ -41,7 +42,12 @@ return [
     'description_card_permission'=>'Permite realizar manutenções de permissões cadastradas no sistema.',
     'role'=>'Função',
     'roles'=>'Funções',
-    'description_card_roles'=>'Permite realizar manutenções de funções cadastradas no sistema.'
+    'description_card_roles'=>'Permite realizar manutenções de funções cadastradas no sistema.',
+    'welcome'=>'Sejam bem vindos ao site de dicas e cursos!',
+    'welcome2'=>'Aproveite nossos conteúdos',
+    'course_list'=>'Lista de cursos',
+    'courses'=>'Cursos',
+    'participate'=>'Participe!'
     
 
 ];
