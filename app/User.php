@@ -41,6 +41,10 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Role');
     }
 
+    public function courses(){
+        return $this->hasMany('App\Courses');
+    }
+
     public function hasRoles($roles){
         $userRoles = $this->roles;
         return $roles->intersect($userRoles)->count();

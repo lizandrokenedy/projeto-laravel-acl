@@ -43,13 +43,16 @@ return [
     'role'=>'Função',
     'roles'=>'Funções',
     'description_card_roles'=>'Permite realizar manutenções de funções cadastradas no sistema.',
+    'description_card_course'=>'Permite realizar manutenções de cursos cadastrados no sistema.',
     'welcome'=>'Sejam bem vindos ao site de dicas e cursos!',
     'welcome2'=>'Aproveite nossos conteúdos',
     'course_list'=>'Lista de cursos',
-    'courses'=>'Cursos',
+    'course'=>'Curso',
     'participate'=>'Participe!',
     'panel'=>'Painel de Controle',
-    'denied'=>'Acesso negado!'
+    'denied'=>'Acesso negado!',
+    'title'=>'Título',
+    'value'=>'Valor',
     
 
 ];

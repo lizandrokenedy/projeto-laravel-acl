@@ -57,6 +57,24 @@
                 </div>
             </div>
             @endcan
+
+
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a class="portfolio-link" href="{{route('courses.index')}}#portfolioModal1">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fas fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+                    <img class="img-fluid" src="img/portfolio/06-thumbnail.jpg" alt="">
+                </a>
+                <div class="portfolio-caption">
+                    <h4>{{__('my.list', ['page'=>__('my.courses')])}}</h4>
+                    <p class="text-muted">{{__('my.description_card_course')}}</p>
+                </div>
+            </div>
+
+
         </div>
     </div>
 </div>

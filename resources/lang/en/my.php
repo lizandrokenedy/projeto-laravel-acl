@@ -44,12 +44,14 @@ return [
     'role'=>'Role',
     'roles'=>'Roles',
     'description_card_roles'=>'It allows to perform maintenance of functions registered in the system',
+    'description_card_course'=>'It allows to perform maintenance of courses registered in the system',
     'welcome'=>'Welcome to the tips and courses site!',
     'welcome2'=>'ENJOY OUR CONTENT',
     'course_list'=>'course list',
     'courses'=>'Courses',
     'participate'=>'Participate!',
     'panel'=>'Control Panel',
-    'denied'=>'Access denied!'
-
+    'denied'=>'Access denied!',
+    'title'=>'Title',
+    'value'=>'Value',
 ];
