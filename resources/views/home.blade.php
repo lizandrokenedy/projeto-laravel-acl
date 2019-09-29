@@ -1,52 +1,66 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+@page(['col'=>12, 'page'=>$page])
+@alert(['msg'=>session('msg'), 'status'=>session('status')])
+@endalert
 
-                <div class="card-body">
-                    @if (session('status'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
+<!-- Portfolio Grid -->
+<div id="portfolio">
+    <div class="container">
+        <div class="row">
+            @can('consultar')
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a class="portfolio-link" href="{{route('users.index')}}#portfolioModal1">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fas fa-plus fa-3x"></i>
+                        </div>
                     </div>
-                    @endif
+                    <img class="img-fluid" src="img/portfolio/05-thumbnail.jpg" alt="">
+                </a>
+                <div class="portfolio-caption">
+                    <h4>{{__('my.list', ['page'=>__('my.user')])}}</h4>
+                    <p class="text-muted">{{__('my.description_card_user')}}</p>
+                </div>
+            </div>
+            @endcan
 
-                    <div class="row">
-
-                        @can('consultar')
-                            <a href="{{route('users.index')}}" style="text-decoration: none;">
-                                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                                    <div class="card-header">{{__('my.list', ['page'=>__('my.user')])}}</div>
-                                    <div class="card-body">
-                                        <p class="card-text">{{__('my.description_card_user')}}</p>
-                                    </div>
-                                </div>
-                            </a>   
-                        @endcan
-                        
-                        <a class="ml-3" href="{{route('roles.index')}}" style="text-decoration: none;">
-                                <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
-                                    <div class="card-header">{{__('my.list', ['page'=>__('my.roles')])}}</div>
-                                    <div class="card-body">
-                                        <p class="card-text">{{__('my.description_card_roles')}}</p>
-                                    </div>
-                                </div>
-                            </a>
-                        <a class="ml-3" href="{{route('permissions.index')}}" style="text-decoration: none;">
-                            <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
-                                <div class="card-header">{{__('my.list', ['page'=>__('my.permissions')])}}</div>
-                                <div class="card-body">
-                                    <p class="card-text">{{__('my.description_card_permission')}}</p>
-                                </div>
-                            </div>
-                        </a>
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a class="portfolio-link" href="{{route('roles.index')}}#portfolioModal1">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fas fa-plus fa-3x"></i>
+                        </div>
                     </div>
+                    <img class="img-fluid" src="img/portfolio/04-thumbnail.jpg" alt="">
+                </a>
+                <div class="portfolio-caption">
+                    <h4>{{__('my.list', ['page'=>__('my.roles')])}}</h4>
+                    <p class="text-muted">{{__('my.description_card_roles')}}</p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6 portfolio-item">
+                <a class="portfolio-link" href="{{route('permissions.index')}}#portfolioModal1">
+                    <div class="portfolio-hover">
+                        <div class="portfolio-hover-content">
+                            <i class="fas fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+                    <img class="img-fluid" src="img/portfolio/03-thumbnail.jpg" alt="">
+                </a>
+                <div class="portfolio-caption">
+                    <h4>{{__('my.list', ['page'=>__('my.permissions')])}}</h4>
+                    <p class="text-muted">{{__('my.description_card_permission')}}</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+@endpage
+
+
 @endsection

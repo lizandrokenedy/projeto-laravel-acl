@@ -47,7 +47,8 @@ return [
     'welcome2'=>'Aproveite nossos conteúdos',
     'course_list'=>'Lista de cursos',
     'courses'=>'Cursos',
-    'participate'=>'Participe!'
+    'participate'=>'Participe!',
+    'panel'=>'Painel de Controle',
     
 
 ];

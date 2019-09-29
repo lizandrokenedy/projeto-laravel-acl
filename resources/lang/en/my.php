@@ -48,6 +48,7 @@ return [
     'welcome2'=>'ENJOY OUR CONTENT',
     'course_list'=>'course list',
     'courses'=>'Courses',
-    'participate'=>'Participate!'
+    'participate'=>'Participate!',
+    'panel'=>'Control Panel',
 
 ];
