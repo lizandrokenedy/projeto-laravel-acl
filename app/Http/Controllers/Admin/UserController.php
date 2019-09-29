@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\RoleRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+
 
 class UserController extends Controller
 {
@@ -28,9 +30,16 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-       
-        $columnList = ['id' => '#', 'name' => trans('my.name'), 'email' => trans('my.email')];
-        
+        // $this->authorize('list-user');
+
+        if(Gate::denies('list-user')){
+            session()->flash('msg', trans('my.denied'));
+            session()->flash('status', 'error');
+            return redirect()->route('home');
+        }
+
+
+        $columnList = ['id' => '#', 'name' => trans('my.name'), 'email' => trans('my.email')];    
         $search = "";
         if(isset($request->search)){
             $search = $request->search;
@@ -41,9 +50,6 @@ class UserController extends Controller
 
         $page = trans('my.users');
         $routeName = $this->route;
-
-        //$request->session()->flash('msg', 'Task was successful!');
-        //$request->session()->flash('status', 'error');
 
         $breadcrumb = [
             (object)['url'=>route('home'), 'title'=>trans('my.home')],
@@ -60,6 +66,15 @@ class UserController extends Controller
      */
     public function create()
     {
+
+        // $this->authorize('create-user');
+
+        if(Gate::denies('create-user')){
+            session()->flash('msg', trans('my.denied'));
+            session()->flash('status', 'error');
+            return redirect()->route('home');
+        }
+
         $routeName = $this->route;
         $page = trans('my.users');
         $page_add = trans('my.user');
@@ -83,6 +98,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
+        // $this->authorize('create-user');
+
+        if(Gate::denies('create-user')){
+            session()->flash('msg', trans('my.denied'));
+            session()->flash('status', 'error');
+            return redirect()->route('home');
+        }
+
         $data = $request->all();
         Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
@@ -109,6 +133,13 @@ class UserController extends Controller
      */
     public function show($id, Request $request)
     {
+
+        if(Gate::denies('show-user')){
+            session()->flash('msg', trans('my.denied'));
+            session()->flash('status', 'error');
+            return redirect()->route('home');
+        }
+
         $routeName = $this->route;
 
         $register = $this->model->find($id);
@@ -144,6 +175,13 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+
+        if(Gate::denies('edit-user')){
+            session()->flash('msg', trans('my.denied'));
+            session()->flash('status', 'error');
+            return redirect()->route('home');
+        }
+
         $routeName = $this->route;
 
         $register = $this->model->find($id);
@@ -175,6 +213,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        if(Gate::denies('edit-user')){
+            session()->flash('msg', trans('my.denied'));
+            session()->flash('status', 'error');
+            return redirect()->route('home');
+        }
+
         $data = $request->all();
 
         if(!$data['password']){
@@ -207,6 +252,11 @@ class UserController extends Controller
     public function destroy($id)
     {
 
+        if(Gate::denies('delete-user')){
+            session()->flash('msg', trans('my.denied'));
+            session()->flash('status', 'error');
+            return redirect()->route('home');
+        }
 
         if($this->model->delete($id)){
             session()->flash('msg', trans('my.registration_deleted_successfully'));

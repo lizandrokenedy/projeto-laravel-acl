@@ -12,8 +12,13 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        $admin = \App\User::firstOrCreate(['email'=>'admin@gmail.com'], [
+         \App\User::firstOrCreate(['email'=>'admin@gmail.com'], [
             'name'=>'Administrador',
+            'password'=>Hash::make('123456')
+        ]);
+
+         \App\User::firstOrCreate(['email'=>'gerente@gmail.com'], [
+            'name'=>'Gerente',
             'password'=>Hash::make('123456')
         ]);
     }

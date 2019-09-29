@@ -42,11 +42,10 @@ Route::middleware('auth')->namespace('Admin')->group(function(){
 
 Route::prefix('admin')->middleware('auth')->namespace('Admin')->group(function(){
     Route::resource('/users', 'UserController');
-    Route::get('/users', 'UserController@index')->name('users.index')->middleware('can:consultar');
-    Route::get('/users/create', 'UserController@create')->name('users.create')->middleware('can:criar');
-    Route::post('/users', 'UserController@store')->name('users.store')->middleware('can:criar');
+});
+
+Route::prefix('admin')->middleware(['auth', 'can:acl'])->namespace('Admin')->group(function(){
     Route::resource('/permissions', 'PermissionController');
     Route::resource('/roles', 'RoleController');
 });
-
 

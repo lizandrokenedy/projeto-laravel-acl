@@ -9,7 +9,7 @@
 <div id="portfolio">
     <div class="container">
         <div class="row">
-            @can('consultar')
+            @can('list-user')
             <div class="col-md-4 col-sm-6 portfolio-item">
                 <a class="portfolio-link" href="{{route('users.index')}}#portfolioModal1">
                     <div class="portfolio-hover">
@@ -24,8 +24,9 @@
                     <p class="text-muted">{{__('my.description_card_user')}}</p>
                 </div>
             </div>
-            @endcan
+           @endcan
 
+            @can('acl')
             <div class="col-md-4 col-sm-6 portfolio-item">
                 <a class="portfolio-link" href="{{route('roles.index')}}#portfolioModal1">
                     <div class="portfolio-hover">
@@ -55,6 +56,7 @@
                     <p class="text-muted">{{__('my.description_card_permission')}}</p>
                 </div>
             </div>
+            @endcan
         </div>
     </div>
 </div>

@@ -49,6 +49,7 @@ return [
     'courses'=>'Cursos',
     'participate'=>'Participe!',
     'panel'=>'Painel de Controle',
+    'denied'=>'Acesso negado!'
     
 
 ];
